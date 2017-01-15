@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/home/shalan/StudioProjects/Checkers/app/build/intermediates/res/merged/debug/layout/menu_win.xml",
+        "source": "/home/shalan/StudioProjects/Checkers/app/src/main/res/layout/menu_win.xml"
+    },
+    {
+        "merged": "/home/shalan/StudioProjects/Checkers/app/build/intermediates/res/merged/debug/layout/starting_win.xml",
+        "source": "/home/shalan/StudioProjects/Checkers/app/src/main/res/layout/starting_win.xml"
+    },
+    {
+        "merged": "/home/shalan/StudioProjects/Checkers/app/build/intermediates/res/merged/debug/layout/game_win.xml",
+        "source": "/home/shalan/StudioProjects/Checkers/app/src/main/res/layout/game_win.xml"
+    }
+]

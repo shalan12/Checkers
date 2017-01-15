@@ -1,0 +1,414 @@
+[
+    {
+        "outputFile": "/home/shalan/StudioProjects/Checkers/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 36,
+                    "endOffset": 87
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/colors.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 2,
+                        "startOffset": 100,
+                        "endColumn": 36,
+                        "endOffset": 134
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 92,
+                    "endColumn": 37,
+                    "endOffset": 125
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/colors.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 2,
+                        "startOffset": 341,
+                        "endColumn": 37,
+                        "endOffset": 376
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 130,
+                    "endColumn": 39,
+                    "endOffset": 165
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/colors.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 2,
+                        "startOffset": 259,
+                        "endColumn": 39,
+                        "endOffset": 296
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 170,
+                    "endColumn": 38,
+                    "endOffset": 204
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/colors.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 2,
+                        "startOffset": 138,
+                        "endColumn": 37,
+                        "endOffset": 173
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 209,
+                    "endColumn": 39,
+                    "endOffset": 244
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/colors.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 2,
+                        "startOffset": 177,
+                        "endColumn": 39,
+                        "endOffset": 214
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 249,
+                    "endColumn": 39,
+                    "endOffset": 284
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/colors.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 2,
+                        "startOffset": 218,
+                        "endColumn": 39,
+                        "endOffset": 255
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 289,
+                    "endColumn": 39,
+                    "endOffset": 324
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/colors.xml",
+                    "position": {
+                        "startLine": 1,
+                        "startColumn": 8,
+                        "startOffset": 21,
+                        "endColumn": 43,
+                        "endOffset": 56
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 329,
+                    "endColumn": 40,
+                    "endOffset": 365
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/colors.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 2,
+                        "startOffset": 60,
+                        "endColumn": 38,
+                        "endOffset": 96
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 370,
+                    "endColumn": 39,
+                    "endOffset": 405
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/colors.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 2,
+                        "startOffset": 300,
+                        "endColumn": 39,
+                        "endOffset": 337
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 410,
+                    "endColumn": 57,
+                    "endOffset": 463
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/dimens.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 92,
+                        "endColumn": 57,
+                        "endOffset": 145
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 468,
+                    "endColumn": 55,
+                    "endOffset": 519
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/dimens.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 151,
+                        "endColumn": 55,
+                        "endOffset": 202
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 524,
+                    "endColumn": 64,
+                    "endOffset": 584
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 1,
+                        "startOffset": 326,
+                        "endColumn": 63,
+                        "endOffset": 388
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 589,
+                    "endColumn": 52,
+                    "endOffset": 637
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 109,
+                        "endColumn": 52,
+                        "endOffset": 157
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 642,
+                    "endColumn": 49,
+                    "endOffset": 687
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 58,
+                        "endColumn": 49,
+                        "endOffset": 103
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 692,
+                    "endColumn": 57,
+                    "endOffset": 745
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 1,
+                        "startOffset": 214,
+                        "endColumn": 56,
+                        "endOffset": 269
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 750,
+                    "endColumn": 55,
+                    "endOffset": 801
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 1,
+                        "startOffset": 271,
+                        "endColumn": 54,
+                        "endOffset": 324
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 806,
+                    "endColumn": 52,
+                    "endOffset": 854
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 163,
+                        "endColumn": 52,
+                        "endOffset": 211
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 859,
+                    "endLine": 25,
+                    "endColumn": 12,
+                    "endOffset": 1145
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/styles.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 191,
+                        "endLine": 12,
+                        "endColumn": 12,
+                        "endOffset": 481
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 1150,
+                    "endLine": 28,
+                    "endColumn": 12,
+                    "endOffset": 1305
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/styles.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 522,
+                        "endLine": 17,
+                        "endColumn": 12,
+                        "endOffset": 679
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 29,
+                    "startColumn": 4,
+                    "startOffset": 1310,
+                    "endLine": 37,
+                    "endColumn": 12,
+                    "endOffset": 1693
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/button_style.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 3,
+                        "startOffset": 115,
+                        "endLine": 10,
+                        "endColumn": 12,
+                        "endOffset": 518
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 38,
+                    "startColumn": 4,
+                    "startOffset": 1698,
+                    "endLine": 48,
+                    "endColumn": 8,
+                    "endOffset": 2158
+                },
+                "from": {
+                    "file": "/home/shalan/StudioProjects/Checkers/app/src/main/res/values/edittext_style.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 116,
+                        "endLine": 12,
+                        "endColumn": 8,
+                        "endOffset": 599
+                    }
+                }
+            }
+        ]
+    }
+]

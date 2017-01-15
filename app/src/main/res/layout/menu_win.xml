@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/bg2" >
+    
+	<Button
+	    android:text="Easy"
+	    android:background="@color/blue"
+	    style = "@style/button_style"
+	    android:layout_marginBottom="2dp"
+	    android:tag="1"
+	    android:onClick="onClick">
+	</Button>
+	<Button
+	    android:text="Medium"
+	   	android:background="@color/blue2"
+	   	style = "@style/button_style"
+	   	android:layout_marginBottom="2dp"
+	   	android:tag="2"
+	   	android:onClick="onClick">
+	</Button>
+	<Button
+	    android:text="Difficult"
+	    android:background="@color/blue"
+	    style = "@style/button_style"
+	    android:tag="3"
+	    android:onClick="onClick">
+	</Button>
+</LinearLayout>

@@ -1,0 +1,12 @@
+<resources>
+        <color name="green">#14ac00</color>
+		<color name="orange">#ff8400</color>
+		<color name = "bg">#f2f4ff</color>
+		<color name ="blue">#00678c</color>
+		<color name = "blue2">#005877</color>
+		<color name = "blue3">#005776</color>
+		<color name = "black">#1d1d1f</color>
+		<color name = "white">#ffffff</color>
+		<color name = "bg2">#e4e4e4</color>
+		
+</resources>
