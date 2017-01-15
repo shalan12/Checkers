@@ -7,8 +7,17 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="f10c591a9a38e3f2337ac73a8d270afb5e977493">
+        sha1="04eeb293465f8033bb7875f83c9326a7dbecc5e2">
         <dex dex="/home/shalan/StudioProjects/Checkers/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_a474ff79802e223e58db5e73c8e17d89e332a043/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/shalan/StudioProjects/Checkers/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3550159236e909649c55954ff02ea7dad15dc21f">
+        <dex dex="/home/shalan/StudioProjects/Checkers/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_cc003d004751ff7377daee875214cb5d6b527f34/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -18,15 +27,6 @@
         revision="25.0.2"
         sha1="44ec51e9d395a47aab135e5e1b556c0007442156">
         <dex dex="/home/shalan/StudioProjects/Checkers/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-v4-18.0.0_9f8abdbf6e21a34a849c4d09bd3bfa9ea1c060a3/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/shalan/StudioProjects/Checkers/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="56864907ce29c6504a2bfd271e459ab83aada62e">
-        <dex dex="/home/shalan/StudioProjects/Checkers/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_cc003d004751ff7377daee875214cb5d6b527f34/classes.dex" />
     </item>
 
 </items>

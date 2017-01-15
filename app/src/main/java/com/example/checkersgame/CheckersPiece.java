@@ -1,12 +1,16 @@
 package com.example.checkersgame;
 
 import android.graphics.Rect;
+import android.util.Log;
 
 public class CheckersPiece
 {
 	private boolean crowned, captured, dark;
 	private CheckersPosition pos;
 	private Rect dstRect;
+	private float velX, velY;
+    private final int timesteps = 3;
+    private int curr_time_step;
 
 	public enum PieceType {
 		LIGHT_PIECE, DARK_PIECE
@@ -17,6 +21,8 @@ public class CheckersPiece
 		pos = new CheckersPosition();
 		dstRect = new Rect();
 		piece_init();
+        velX = velY = 0;
+        curr_time_step = timesteps;
 	}
 
 	public CheckersPiece(CheckersPiece cp)
@@ -29,21 +35,39 @@ public class CheckersPiece
 		this.setCrowned(cp.is_crowned());
 		if (cp.is_dark()) this.setDark(true);
 		else this.setDark(false);
+        curr_time_step = 0;
 	}
 
 	public void setPos(int row, int col)
 	{
-		this.pos.setRow(row);
-		this.pos.setCol(col);
+        Rect bounds = Commons.getBounds();
+        if (bounds != null) {
+            float sX = (col - this.pos.get_col()) * (bounds.right - bounds.left) / CheckersBoard.NUM_COLS ;
+            float sY = (row - this.pos.get_row()) * (bounds.bottom - bounds.top) / CheckersBoard.NUM_ROWS ;
+            this.velX = sX/timesteps;
+            this.velY = sY/timesteps;
+
+            curr_time_step = 0;
+        }
+        this.pos.setCol(col);
+        this.pos.setRow(row);
 	}
 
 	public Rect getdstRect()
 	{
 		Rect bounds = Commons.getBounds();
-		dstRect.left = (bounds.right - bounds.left) / 8 * this.pos.get_col();
-		dstRect.right = (int) (dstRect.left + (bounds.right - bounds.left) / 8f);
-		dstRect.top = (bounds.bottom - bounds.top) / 8 * (this.pos.get_row()) + bounds.top;
-		dstRect.bottom = (int) (dstRect.top + (bounds.bottom - bounds.top) / 8f);
+        if (curr_time_step < timesteps) {
+            curr_time_step += 1;
+            dstRect.left += velX;
+            dstRect.right += velX;
+            dstRect.top += velY;
+            dstRect.bottom += velY;
+        } else {
+            dstRect.left = (int) ((bounds.right - bounds.left) / CheckersBoard.NUM_COLS * this.pos.get_col());
+            dstRect.right = (int) ((int) (dstRect.left + (bounds.right - bounds.left) / ((float)CheckersBoard.NUM_COLS) ));
+            dstRect.top = (int) ((bounds.bottom - bounds.top) / CheckersBoard.NUM_ROWS * (this.pos.get_row()) + bounds.top);
+            dstRect.bottom = (int) ((int) (dstRect.top + (bounds.bottom - bounds.top) / ((float)CheckersBoard.NUM_ROWS) ));
+        }
 		return dstRect;
 	}
 

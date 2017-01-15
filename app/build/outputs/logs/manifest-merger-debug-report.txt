@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:2:1-31:12
+ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:2:1-29:12
 	package
 		ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:3:5-39
 		INJECTED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml
@@ -26,7 +26,7 @@ ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml
 		INJECTED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml
 		INJECTED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml
 application
-ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:11:5-29:19
+ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:11:5-27:19
 	android:label
 		ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:14:9-41
 	android:allowBackup
@@ -39,23 +39,19 @@ activity#com.example.checkersgame.GameWin
 ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:16:9-18:32
 	android:name
 		ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:17:13-60
-activity#com.example.checkersgame.EnterBoardWin
-ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:19:9-20:78
-	android:name
-		ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:20:13-66
 activity#com.example.checkersgame.MenuWin
-ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:21:9-28:25
+ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:19:9-26:25
 	android:label
-		ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:22:13-45
+		ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:20:13-45
 	android:name
-		ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:21:19-68
+		ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:19:19-68
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:23:13-27:29
+ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:21:13-25:29
 action#android.intent.action.MAIN
-ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:24:17-69
+ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:22:17-69
 	android:name
-		ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:24:25-66
+		ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:22:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:26:17-77
+ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:24:17-77
 	android:name
-		ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:26:27-74
+		ADDED from /home/shalan/StudioProjects/Checkers/app/src/main/AndroidManifest.xml:24:27-74

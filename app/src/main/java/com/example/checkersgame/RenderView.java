@@ -98,22 +98,18 @@ public class RenderView extends SurfaceView
 			// Integer.toString(canvas.getWidth()) + "height = "
 			// + Integer.toString(canvas.getHeight()));
 
-			for (int i = 0; i < 8; i++)
+			for (int i = 0; i < CheckersBoard.NUM_ROWS; i++)
 			{
-				for (int j = 0; j < 8; j++)
+				for (int j = 0; j < CheckersBoard.NUM_COLS; j++)
 				{
 					cp = gw.getBoard().board_get_piece_at(i, j);
 					if (!cp.is_none_piece())
 					{
 						temp = cp.getdstRect();
-						if (cp.is_dark() && !cp.is_crowned()) canvas.drawBitmap(darkPiece, null,
-								temp, null);
-						else if (cp.is_dark() && cp.is_crowned())
-							canvas.drawBitmap(darkCrowned, null, temp, null);
-						if (!cp.is_dark() && !cp.is_crowned()) canvas.drawBitmap(lightPiece, null,
-								temp, null);
-						else if (!cp.is_dark() && cp.is_crowned())
-							canvas.drawBitmap(lightCrowned, null, temp, null);
+						if (cp.is_dark() && !cp.is_crowned()) canvas.drawBitmap(darkPiece, null, temp, null);
+						else if (cp.is_dark() && cp.is_crowned()) canvas.drawBitmap(darkCrowned, null, temp, null);
+						if (!cp.is_dark() && !cp.is_crowned()) canvas.drawBitmap(lightPiece, null, temp, null);
+						else if (!cp.is_dark() && cp.is_crowned()) canvas.drawBitmap(lightCrowned, null, temp, null);
 
 					}
 				}
