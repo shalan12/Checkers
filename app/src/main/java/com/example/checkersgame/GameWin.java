@@ -20,8 +20,8 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.Toast;
+import com.example.checkersgame.CheckersPiece.PieceType;
 
 public class GameWin extends Activity implements Callback, OnTouchListener
 {
@@ -104,20 +104,20 @@ public class GameWin extends Activity implements Callback, OnTouchListener
 					{
 						move.setEnd(new CheckersPosition(row, col));
 
-						if (cb.isMoveValid(move) == 0)
+						if (cb.isMoveValid(move) == CheckersBoard.MOVE_VALID)
 						{
 							cb.simple_move(move);
 							endGame(cb.winner());
 
-							while (cb.get_turn() == CheckersBoard.TURN_DARK)
+							while (cb.get_turn() == PieceType.DARK_PIECE)
 							{
 
-								gt = new GameTree(cb, CheckersBoard.TURN_DARK, 0, difficulty);
+								gt = new GameTree(cb, PieceType.DARK_PIECE, 0, difficulty);
 								if (gt.subTrees.size() == 0)
 								{
 									cb.set_winner(CheckersBoard.WINNER_LIGHT);
 									endGame(cb.winner());
-									cb.setTurn(CheckersBoard.TURN_LIGHT);
+									cb.setTurn(PieceType.DARK_PIECE);
 									break;
 								}
 								else

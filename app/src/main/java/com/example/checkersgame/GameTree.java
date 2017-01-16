@@ -12,27 +12,27 @@ public class GameTree
 	CheckersBoard cb;
 	static final PieceType ComputerType = PieceType.DARK_PIECE;
 
-	GameTree(CheckersBoard cb, int turn, int turnNo, int maxTurns)
+	GameTree(CheckersBoard cb, PieceType turn, int turnNo, int maxTurns)
     {
 		this.cb = cb;
 		subTrees = new ArrayList<GameTree>();
 		ArrayList<CheckersPiece> pieces = null;
-		int nextTurn = -1;
+		PieceType nextTurn = null;
 		int rowInc = 0;
 		boolean toMaximize;
 
 		if (turnNo < maxTurns) {
             CheckersBoard boardNext = new CheckersBoard(cb); // make a copy of the board
 
-            if (turn == CheckersBoard.TURN_LIGHT) {
+            if (turn == PieceType.LIGHT_PIECE) {
                 pieces = boardNext.getPieces(PieceType.LIGHT_PIECE);
-                nextTurn = CheckersBoard.TURN_DARK;
+                nextTurn = PieceType.DARK_PIECE;
                 rowInc = 1; // lightPieces move downwards
                 score = Integer.MAX_VALUE;
                 toMaximize = false;
             } else {
                 pieces = boardNext.getPieces(PieceType.DARK_PIECE);
-                nextTurn = CheckersBoard.TURN_LIGHT;
+                nextTurn = PieceType.LIGHT_PIECE;
                 rowInc = -1; // darkPieces move upwards
                 score = Integer.MIN_VALUE;
                 toMaximize = true;
@@ -67,11 +67,11 @@ public class GameTree
 
 	}
 
-	private void doMove(CheckersSimpleMove cSM, int turn, int turnNo, int maxTurns,
+	private void doMove(CheckersSimpleMove cSM, PieceType turn, int turnNo, int maxTurns,
 			boolean toMaximize)
 	{
 		CheckersBoard boardNext = new CheckersBoard(cb); // make a copy of the old board
-		if (boardNext.isMoveValid(cSM) == 0) // if the move can be performed
+		if (boardNext.isMoveValid(cSM) == CheckersBoard.MOVE_VALID) // if the move can be performed
 		{
 			boardNext.simple_move(cSM); // perform move
 			subTrees.add(new GameTree(boardNext, turn, turnNo + 1, maxTurns)); // recursively play the game for this point on

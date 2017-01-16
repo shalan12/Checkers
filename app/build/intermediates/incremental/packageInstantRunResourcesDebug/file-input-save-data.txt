@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sat Jan 14 18:45:10 CST 2017
+#Sun Jan 15 18:03:23 CST 2017
 8.set=ANDROID_RESOURCE
 1.base=/home/shalan/StudioProjects/Checkers/app/build/intermediates/res/resources-debug.ap_
 1.file=/home/shalan/StudioProjects/Checkers/app/build/intermediates/res/resources-debug.ap_/res/drawable-hdpi-v4/text_border.xml

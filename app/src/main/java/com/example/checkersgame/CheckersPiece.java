@@ -5,24 +5,27 @@ import android.util.Log;
 
 public class CheckersPiece
 {
-	private boolean crowned, captured, dark;
+	private boolean crowned, captured;
+    private PieceType pieceType;
 	private CheckersPosition pos;
 	private Rect dstRect;
+    // for animation
 	private float velX, velY;
     private final int timesteps = 3;
     private int curr_time_step;
 
 	public enum PieceType {
-		LIGHT_PIECE, DARK_PIECE
+		LIGHT_PIECE, DARK_PIECE, NON_PIECE
 	};
 
-	public CheckersPiece()
+	public CheckersPiece(PieceType pieceType)
 	{
 		pos = new CheckersPosition();
 		dstRect = new Rect();
 		piece_init();
         velX = velY = 0;
         curr_time_step = timesteps;
+        this.pieceType = pieceType;
 	}
 
 	public CheckersPiece(CheckersPiece cp)
@@ -33,8 +36,7 @@ public class CheckersPiece
 		if (cp.is_captured()) this.set_captured();
 		else this.captured = false;
 		this.setCrowned(cp.is_crowned());
-		if (cp.is_dark()) this.setDark(true);
-		else this.setDark(false);
+		this.pieceType = cp.pieceType;
         curr_time_step = 0;
 	}
 
@@ -56,6 +58,7 @@ public class CheckersPiece
 	public Rect getdstRect()
 	{
 		Rect bounds = Commons.getBounds();
+        // animate piece to it's position
         if (curr_time_step < timesteps) {
             curr_time_step += 1;
             dstRect.left += velX;
@@ -75,15 +78,10 @@ public class CheckersPiece
 	{
 		this.crowned = false;
 		this.captured = false;
-		this.dark = false;
 		this.pos.setRow(0);
 		this.pos.setRow(0);
 	}
 
-	public void setDark(boolean isDark)
-	{
-		dark = isDark;
-	}
 
 	boolean is_none_piece()
 	{
@@ -101,10 +99,7 @@ public class CheckersPiece
 		return this.crowned;
 	}
 
-	boolean is_dark()
-	{
-		return this.dark;
-	}
+    PieceType getPieceType() {return this.pieceType;}
 
 	CheckersPosition get_position()
 	{
@@ -132,7 +127,7 @@ public class CheckersPiece
 		}
 		else
 		{
-			if (is_dark())
+			if (pieceType == PieceType.DARK_PIECE)
 			{
 				s = "b";
 				if (is_crowned()) s = "B";

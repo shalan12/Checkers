@@ -16,30 +16,31 @@ public class CheckersBoard
 	final static int WINNER_LIGHT = 1;
 	final static int DRAW = 0;
 	final static int WINNER_DARK = 2;
-	final static int TURN_DARK = 2;
-	final static int TURN_LIGHT = 1;
 	final static int NUM_ROWS = 8;
 	final static int NUM_COLS = 8;
     final static int NUM_PIECES = 12;
+    public final static int MOVE_VALID = 1;
+    public final static int MOVE_INVALID = -1;
 	private boolean turnIsKill;
-	private int turn;
+	private PieceType turn;
 	private int winner;
+
 
 	public void initVars()
 	{
 		this.lightPieces = new ArrayList<CheckersPiece>();
 		this.darkPieces = new ArrayList<CheckersPiece>();
-		nonePiece = new CheckersPiece();
+		nonePiece = new CheckersPiece(PieceType.NON_PIECE);
 		nonePiece.setPos(-1, -1);
 		dstRect = Commons.getBounds();
-		turn = TURN_LIGHT;
+		turn = PieceType.LIGHT_PIECE;
 		turnIsKill = false;
 		winner = DRAW;
 	}
 
-	public void setTurn(int t)
+	public void setTurn(PieceType pt)
 	{
-		turn = t;
+		turn = pt;
 	}
 
 	public Rect getDstRect()
@@ -63,7 +64,7 @@ public class CheckersBoard
 		this.board_init();
 	}
 
-	public int get_turn()
+	public PieceType get_turn()
 	{
 		return turn;
 	}
@@ -91,28 +92,6 @@ public class CheckersBoard
 		this.turnIsKill = cb.turnIsKill;
 	}
 
-	public CheckersBoard(String s1, String s2)
-	{
-		this.initVars();
-		String[] darkPieces = s1.split("\\,");
-		String[] lightPieces = s2.split("\\,");
-		CheckersPiece temp;
-		nonePiece.setPos(-1, -1);
-		for (int i = 0; i < darkPieces.length; i++)
-		{
-			temp = new CheckersPiece();
-			temp.get_position().position_parse(darkPieces[i]);
-			temp.setDark(true);
-			this.darkPieces.add(temp);
-		}
-		for (int i = 0; i < lightPieces.length; i++)
-		{
-			temp = new CheckersPiece();
-			temp.get_position().position_parse(lightPieces[i]);
-			this.lightPieces.add(temp);
-		}
-	}
-
 	CheckersPiece board_get_piece_at(int row, int col)
 	{
 
@@ -135,7 +114,7 @@ public class CheckersBoard
         // add light pieces
 		for (int i = 0; i < NUM_PIECES; i++)
 		{
-			temp = new CheckersPiece();
+			temp = new CheckersPiece(PieceType.LIGHT_PIECE);
 			temp.setPos(r, c);
 			this.lightPieces.add(temp);
 			c += 2;
@@ -151,9 +130,8 @@ public class CheckersBoard
         // add dark pieces
         for (int i = 0; i < NUM_PIECES; i++)
 		{
-			temp = new CheckersPiece();
+			temp = new CheckersPiece(PieceType.DARK_PIECE);
 			temp.setPos(r, c);
-			temp.setDark(true);
 			this.darkPieces.add(temp);
 			c += 2;
 			if (c >= NUM_COLS)
@@ -167,7 +145,7 @@ public class CheckersBoard
 	void simple_move(CheckersSimpleMove cSM)
 	{
 		CheckersPiece cp = board_get_piece_at(cSM.get_start().get_row(), cSM.get_start().get_col());
-		if (isMoveValid(cSM) == 0)
+		if (isMoveValid(cSM) == MOVE_VALID)
 		{
 			cp.setPos(cSM.get_end().get_row(), cSM.get_end().get_col());
 			CheckersPosition cStart = cSM.get_start();
@@ -179,22 +157,22 @@ public class CheckersBoard
 			if (rowDiff == 2 || rowDiff == -2) // if killing a piece
 			{
 				CheckersPiece cap = board_get_piece_at(cStart.get_row() - rowDiff / 2, cStart.get_col() - colDiff / 2); // get piece being killed
-				if (!cap.is_none_piece()) // if is a
+				if (!cap.is_none_piece()) // if is a valid piece
 				{
 					cap.set_captured();
-					turnIsKill = true;
+					turnIsKill = true; // get another turn to kill, if can kill
 				}
 			}
 
-			if ((turnIsKill && !canKill(cp)) || !turnIsKill)
+			if ((turnIsKill && !canKill(cp)) || !turnIsKill) // otherwise turn changes
 			{
 				turnIsKill = false;
-				if (turn == TURN_DARK) turn = TURN_LIGHT;
-				else turn = TURN_DARK;
+				if (turn == PieceType.DARK_PIECE) turn = PieceType.LIGHT_PIECE;
+				else turn = PieceType.DARK_PIECE;
 			}
 
-			if (cp.is_dark() && cEnd.get_row() == 0) cp.setCrowned(true);
-			else if (!cp.is_dark() && cEnd.get_row() == 7) cp.setCrowned(true);
+			if (cp.getPieceType() == PieceType.DARK_PIECE && cEnd.get_row() == 0) cp.setCrowned(true);
+			else if (cp.getPieceType() == PieceType.LIGHT_PIECE && cEnd.get_row() == NUM_ROWS - 1) cp.setCrowned(true);
 		}
 	}
 
@@ -215,12 +193,10 @@ public class CheckersBoard
 			for (int j = 0; j < NUM_COLS; j++)
 			{
 				cp = board_get_piece_at(i, j);
-				if (!cp.is_none_piece())
+				if (!cp.is_none_piece() && pT == cp.getPieceType())
 				{
-					if (pT == PieceType.DARK_PIECE && cp.is_dark()) toReturn.add(cp);
-					else if (pT == PieceType.LIGHT_PIECE && !cp.is_dark()) toReturn.add(cp);
+				    toReturn.add(cp);
 				}
-
 			}
 		}
 		return toReturn;
@@ -281,118 +257,33 @@ public class CheckersBoard
 		return count;
 	}
 
-	public int validate(CheckersMove moves)
-	{
-		int res = 0;
-		for (CheckersSimpleMove m : moves.getMoves())
-		{
-			res = isMoveValid(m);
-			if (res > 0)
-			{
-				break;
-			}
-		}
-		return res;
-	}
-
 	public boolean canKill(CheckersPiece cp)
 	{
 		CheckersSimpleMove simpleMove = new CheckersSimpleMove();
 		simpleMove.setStart(cp.get_position());
 		CheckersPosition cpos = new CheckersPosition(cp.get_position().get_row() + 2, cp.get_position().get_col() + 2);
 		simpleMove.setEnd(cpos);
-		if (isMoveValid(simpleMove) == 0) return true;
+		if (isMoveValid(simpleMove) == MOVE_VALID) return true;
 		cpos = new CheckersPosition(cp.get_position().get_row() + 2, cp.get_position().get_col() - 2);
 		simpleMove.setEnd(cpos);
-		if (isMoveValid(simpleMove) == 0) return true;
+		if (isMoveValid(simpleMove) == MOVE_VALID) return true;
 		cpos = new CheckersPosition(cp.get_position().get_row() - 2, cp.get_position().get_col() + 2);
 		simpleMove.setEnd(cpos);
-		if (isMoveValid(simpleMove) == 0) return true;
+		if (isMoveValid(simpleMove) == MOVE_VALID) return true;
 		cpos = new CheckersPosition(cp.get_position().get_row() - 2, cp.get_position().get_col() - 2);
 		simpleMove.setEnd(cpos);
-		if (isMoveValid(simpleMove) == 0) return true;
+		if (isMoveValid(simpleMove) == MOVE_VALID) return true;
 		return false;
 
 	}
 
-    // 0 valid
-    // 1 game finished
-    // 2 wrong turn
-    // 3 wrong starting
-    // 4 wrong ending
-    // 5 wrong step
-    // 6 not crowned | wrong step
-    // 7 not killed
-	public int isMoveValid(CheckersSimpleMove simpleMove)
+	public int isMoveValid(CheckersSimpleMove simpleMove) //buggy
 	{
+        //ArrayList<CheckersPiece> pieces;
+        CheckersPiece startPiece = board_get_piece_at(simpleMove.get_start().get_row(), simpleMove.get_start().get_col());
+        CheckersPiece endPiece = board_get_piece_at(simpleMove.get_end().get_row(), simpleMove.get_end().get_col());
+        //if (startPiece. != turn || endPiece)
+        return MOVE_VALID;
 
-		int res = 0;
-		if (turnIsKill) res = 7;
-		if (winner() > 0)
-		{
-			res = 1;
-		}
-		else
-		{
-			CheckersPiece startPiece = board_get_piece_at(simpleMove.get_start().get_row(),
-					simpleMove.get_start().get_col());
-			CheckersPiece endPiece = board_get_piece_at(simpleMove.get_end().get_row(), simpleMove
-					.get_end().get_col());
-
-			if (startPiece.is_none_piece()) // if moving a non-piece
-			{
-                Log.d("isMoveValid", "Invalid -- Moving a non-piece");
-                res = 3;
-			}
-			else if (!endPiece.is_none_piece()) // if placing at occupied square
-			{
-                Log.d("isMoveValid", "Invalid -- Placing at occupied square");
-				res = 4;
-			}
-			else if (simpleMove.get_end().get_row() >= NUM_ROWS || simpleMove.get_end().get_row() < 0
-					|| simpleMove.get_end().get_col() >= NUM_COLS || simpleMove.get_end().get_col() < 0)  // if placing outside of board
-            {
-                Log.d("isMoveValid", "Invalid -- Placing outside of board");
-                res = 4;
-            }
-			else if ((startPiece.is_dark() && turn == TURN_LIGHT) || (!startPiece.is_dark() && turn == TURN_DARK)) // if moving wrong colored peiece
-			{
-                Log.d("isMoveValid", "Invalid -- Moving wrong colored piece");
-                res = 2;
-			}
-			else
-			{
-				int dCol = simpleMove.get_end().get_col() - simpleMove.get_start().get_col();
-				int dRow = simpleMove.get_end().get_row() - simpleMove.get_start().get_row();
-
-				if (dRow == 0 || dCol == 0 || Math.abs(dRow) > 2 || Math.abs(dCol) > 2 || (Math.abs(dRow) == 2 && Math.abs(dCol) != 2)
-                        || (Math.abs(dCol) == 2 && Math.abs(dRow) != 2)) // wrong move
-				{
-                    Log.d("isMoveValid", "Invalid -- invalid move");
-                    res = 6;
-				}
-				else if (!startPiece.is_crowned() && ( (startPiece.is_dark() && dRow > 0) || (!startPiece.is_dark() && dRow < 0))) // if piece isn't crowned but moving in opposite direction
-				{
-                    Log.d("isMoveValid", "Invalid -- Not a crowned piece");
-                    res = 6;
-				}
-				else if (Math.abs(dRow) == 2 || Math.abs(dCol) == 2) // if taking a step of two
-				{
-					int midR = simpleMove.get_start().get_row() + dRow / 2;
-					int midC = simpleMove.get_start().get_col() + dCol / 2;
-					CheckersPiece midPiece = board_get_piece_at(midR, midC); // get the piece that's one step away
-
-					if (midPiece.is_none_piece() || midPiece.is_dark() == startPiece.is_dark())  // if there's no piece there or it's a piece of the same color
-					{
-                        Log.d("isMoveValid", "Invalid -- Capturing an invalid piece (non-piece or own piece)");
-                        res = 5;
-					}
-					//else res = 0; // don't think this should be here
-				}
-
-			}
-		}
-
-        return res;
 	}
 }
