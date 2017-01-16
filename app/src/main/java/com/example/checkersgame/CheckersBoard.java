@@ -3,7 +3,6 @@ package com.example.checkersgame;
 import java.util.ArrayList;
 
 import android.graphics.Rect;
-import android.util.Log;
 
 import com.example.checkersgame.CheckersPiece.PieceType;
 
@@ -46,11 +45,6 @@ public class CheckersBoard
 	public Rect getDstRect()
 	{
 		return dstRect;
-	}
-
-	public void setDstRect(Rect r)
-	{
-		dstRect = r;
 	}
 
 	public void setDstRect(int left, int top, int right, int bottom)
@@ -142,14 +136,14 @@ public class CheckersBoard
 		}
 	}
 
-	void simple_move(CheckersSimpleMove cSM)
+	void move(CheckersMove cm)
 	{
-		CheckersPiece cp = board_get_piece_at(cSM.get_start().get_row(), cSM.get_start().get_col());
-		if (isMoveValid(cSM) == MOVE_VALID)
+		CheckersPiece cp = board_get_piece_at(cm.get_start().get_row(), cm.get_start().get_col());
+		if (isMoveValid(cm) == MOVE_VALID)
 		{
-			cp.setPos(cSM.get_end().get_row(), cSM.get_end().get_col());
-			CheckersPosition cStart = cSM.get_start();
-			CheckersPosition cEnd = cSM.get_end();
+			cp.setPos(cm.get_end().get_row(), cm.get_end().get_col());
+			CheckersPosition cStart = cm.get_start();
+			CheckersPosition cEnd = cm.get_end();
 
 			int rowDiff = cStart.get_row() - cEnd.get_row();
 			int colDiff = cStart.get_col() - cEnd.get_col();
@@ -173,14 +167,6 @@ public class CheckersBoard
 
 			if (cp.getPieceType() == PieceType.DARK_PIECE && cEnd.get_row() == 0) cp.setCrowned(true);
 			else if (cp.getPieceType() == PieceType.LIGHT_PIECE && cEnd.get_row() == NUM_ROWS - 1) cp.setCrowned(true);
-		}
-	}
-
-	void move(CheckersMove cM)
-	{
-		for (CheckersSimpleMove x : cM.getMoves())
-		{
-			simple_move(x);
 		}
 	}
 
@@ -259,7 +245,7 @@ public class CheckersBoard
 
 	public boolean canKill(CheckersPiece cp)
 	{
-		CheckersSimpleMove simpleMove = new CheckersSimpleMove();
+		CheckersMove simpleMove = new CheckersMove();
 		simpleMove.setStart(cp.get_position());
 		CheckersPosition cpos = new CheckersPosition(cp.get_position().get_row() + 2, cp.get_position().get_col() + 2);
 		simpleMove.setEnd(cpos);
@@ -277,7 +263,7 @@ public class CheckersBoard
 
 	}
 
-	public int isMoveValid(CheckersSimpleMove simpleMove) //buggy
+	public int isMoveValid(CheckersMove simpleMove) //buggy
 	{
         //ArrayList<CheckersPiece> pieces;
         CheckersPiece startPiece = board_get_piece_at(simpleMove.get_start().get_row(), simpleMove.get_start().get_col());

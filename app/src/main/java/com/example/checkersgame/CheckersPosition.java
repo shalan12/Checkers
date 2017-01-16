@@ -21,11 +21,6 @@ public class CheckersPosition
 		this.row = 7 - (s.charAt(1) - '1');
 	}
 
-	public CheckersPosition(String pos)
-	{
-		this.position_parse(pos);
-	}
-
 	public CheckersPosition(int r, int c)
 	{
 		row = r;
@@ -42,13 +37,8 @@ public class CheckersPosition
 	{
 		return this.row;
 	}
-
 	int get_col()
 	{
 		return this.col;
 	}
-	// boolean operator == (CheckersPosition other) {
-	// if (row == other.row && col == other.col) return true;
-	// else return false;
-	// }
 }

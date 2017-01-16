@@ -25,10 +25,7 @@ public class RenderView extends SurfaceView
 	private Bitmap lightCrowned;
 	private SurfaceHolder holder;
 	private boolean init;
-	private double xScale, yScale;
 	private double baseLength;
-	String initBoardState;
-	private Context context;
 	ScheduledThreadPoolExecutor stpe;
 	GameWin gw;
 
@@ -40,7 +37,6 @@ public class RenderView extends SurfaceView
 	public RenderView(Context context, AttributeSet as)
 	{
 		super(context, as);
-		this.context = context;
 		this.gw = gw;
 		Log.d("RenderView()", "-here");
 		AssetManager assets = context.getAssets();
@@ -78,12 +74,11 @@ public class RenderView extends SurfaceView
 
 			if (!init)
 			{
-				xScale = canvas.getWidth() / baseLength;
-				// yScale = canvas.getHeight() / baseLength;
-				int height = (int) (800 * xScale);
+				double scale = canvas.getWidth() / baseLength;
+				int height = (int) (800 * scale);
 				int top = (canvas.getHeight() - height) / 2;
 				int bottom = top + height;
-				int right = (int) (800 * xScale);
+				int right = (int) (800 * scale);
 				Commons.setBounds(new Rect(0, top, right, bottom));
 				gw.getBoard().setDstRect(0, top, right, bottom);
 
@@ -112,10 +107,8 @@ public class RenderView extends SurfaceView
 							if (cp.is_crowned()) canvas.drawBitmap(lightCrowned, null, temp, null);
 							else canvas.drawBitmap(lightPiece, null, temp, null);
 						}
-
 					}
 				}
-
 			}
 
 			holder.unlockCanvasAndPost(canvas);

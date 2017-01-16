@@ -1,7 +1,6 @@
 package com.example.checkersgame;
 
 import android.graphics.Rect;
-import android.util.Log;
 
 public class CheckersPiece
 {

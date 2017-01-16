@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.media.MediaPlayer;
@@ -27,7 +26,7 @@ public class GameWin extends Activity implements Callback, OnTouchListener
 {
 	private RenderView v;
 	private CheckersBoard cb;
-	private CheckersSimpleMove move;
+	private CheckersMove move;
 	MediaPlayer mediaPlayer = null;
 	int difficulty;
 	GameTree gt;
@@ -96,7 +95,7 @@ public class GameWin extends Activity implements Callback, OnTouchListener
 					{
 						if (!cb.board_get_piece_at(row, col).is_none_piece())
 						{
-							move = new CheckersSimpleMove();
+							move = new CheckersMove();
 							move.setStart(new CheckersPosition(row, col));
 						}
 					}
@@ -106,7 +105,7 @@ public class GameWin extends Activity implements Callback, OnTouchListener
 
 						if (cb.isMoveValid(move) == CheckersBoard.MOVE_VALID)
 						{
-							cb.simple_move(move);
+							cb.move(move);
 							endGame(cb.winner());
 
 							while (cb.get_turn() == PieceType.DARK_PIECE)
@@ -122,7 +121,7 @@ public class GameWin extends Activity implements Callback, OnTouchListener
 								}
 								else
 								{
-									cb.simple_move(gt.playMove());
+									cb.move(gt.playMove());
 									endGame(cb.winner());
 								}
 

@@ -1,7 +1,6 @@
 package com.example.checkersgame;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 
 import com.example.checkersgame.CheckersPiece.PieceType;
 
@@ -38,10 +37,10 @@ public class GameTree
                 toMaximize = true;
             }
 
-            CheckersSimpleMove csm;
+            CheckersMove csm;
             CheckersPosition pos = new CheckersPosition();
             int i = 0;
-            csm = new CheckersSimpleMove();
+            csm = new CheckersMove();
 
             for (CheckersPiece piece : pieces) {
                 pos.setRow(piece.get_position().get_row());
@@ -67,13 +66,13 @@ public class GameTree
 
 	}
 
-	private void doMove(CheckersSimpleMove cSM, PieceType turn, int turnNo, int maxTurns,
-			boolean toMaximize)
+	private void doMove(CheckersMove cSM, PieceType turn, int turnNo, int maxTurns,
+                        boolean toMaximize)
 	{
 		CheckersBoard boardNext = new CheckersBoard(cb); // make a copy of the old board
 		if (boardNext.isMoveValid(cSM) == CheckersBoard.MOVE_VALID) // if the move can be performed
 		{
-			boardNext.simple_move(cSM); // perform move
+			boardNext.move(cSM); // perform move
 			subTrees.add(new GameTree(boardNext, turn, turnNo + 1, maxTurns)); // recursively play the game for this point on
 			if (toMaximize) score = Math.max(score, subTrees.get(subTrees.size() - 1).score);
 			else score = Math.min(score, subTrees.get(subTrees.size() - 1).score);
@@ -93,7 +92,7 @@ public class GameTree
 		return score2;
 	}
 
-	public CheckersSimpleMove playMove()
+	public CheckersMove playMove()
 	{
 		CheckersBoard nextBoard = null;
 
@@ -106,7 +105,7 @@ public class GameTree
 			}
 		}
 
-		CheckersSimpleMove csm = new CheckersSimpleMove();
+		CheckersMove csm = new CheckersMove();
 
         for (int i = 0; i < 8; i++)
 		{

@@ -1,23 +1,55 @@
 package com.example.checkersgame;
 
-import java.util.ArrayList;
-
 public class CheckersMove
 {
-	ArrayList<CheckersSimpleMove> moves;
+	private CheckersPosition start, end;
 
-	CheckersMove(String s)
+	public void setStart(CheckersPosition start)
 	{
-		String[] temp = s.split("\\,");
-		moves = new ArrayList<CheckersSimpleMove>();
-		for (int i = 0; i < temp.length - 1; i++)
-		{
-			moves.add(new CheckersSimpleMove(temp[i], temp[i + 1]));
-		}
+		this.start = start;
 	}
 
-	ArrayList<CheckersSimpleMove> getMoves()
+	public void setEnd(CheckersPosition end)
 	{
-		return moves;
+		this.end = end;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "Start : row = " + start.get_row() + " col = " + start.get_col() + "\nEnd : row = "
+				+ end.get_row() + " col = " + end.get_col();
+	}
+
+	public void initVars()
+	{
+		start = new CheckersPosition();
+		end = new CheckersPosition();
+	}
+
+	public CheckersMove()
+	{
+		initVars();
+		start.setRow(-1);
+		start.setCol(-1);
+		end.setRow(-1);
+		end.setCol(-1);
+	}
+
+	public CheckersMove(String s1, String s2)
+	{
+		initVars();
+		start.position_parse(s1);
+		end.position_parse(s2);
+	}
+
+	public CheckersPosition get_start()
+	{
+		return start;
+	}
+
+	public CheckersPosition get_end()
+	{
+		return end;
 	}
 }
