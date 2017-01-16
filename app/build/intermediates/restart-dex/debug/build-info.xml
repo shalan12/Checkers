@@ -5,40 +5,33 @@
     density="hdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="152250336279035"
+    timestamp="160870863008962"
     token="8215692461422699136"
-    verifier="FIELD_ADDED" >
+    verifier="FULL_BUILD_REQUESTED" >
 
     <task
         name="javac"
-        duration="400" />
+        duration="422" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="186" />
+        duration="149" />
     <task
         name="verifier"
-        duration="92" />
+        duration="6" />
 
     <artifact
-        location="/home/shalan/StudioProjects/Checkers/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex"
-        type="DEX" />
+        location="/home/shalan/StudioProjects/Checkers/app/build/outputs/apk/app-debug.apk"
+        type="MAIN" />
 
     <build
-        timestamp="147987751920740"
+        timestamp="160870863008962"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="/home/shalan/StudioProjects/Checkers/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
-    </build>
-    <build
-        timestamp="152250336279035"
-        verifier="FIELD_ADDED" >
-        <artifact
-            location="/home/shalan/StudioProjects/Checkers/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex"
-            type="DEX" />
     </build>
 
 </instant-run>

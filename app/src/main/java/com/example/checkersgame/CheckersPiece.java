@@ -4,7 +4,11 @@ import android.graphics.Rect;
 
 public class CheckersPiece
 {
-	private boolean crowned, captured;
+    public enum PieceType {
+        LIGHT_PIECE, DARK_PIECE, NON_PIECE
+    };
+
+    private boolean crowned, captured;
     private PieceType pieceType;
 	private CheckersPosition pos;
 	private Rect dstRect;
@@ -13,9 +17,7 @@ public class CheckersPiece
     private final int timesteps = 3;
     private int curr_time_step;
 
-	public enum PieceType {
-		LIGHT_PIECE, DARK_PIECE, NON_PIECE
-	};
+
 
 	public CheckersPiece(PieceType pieceType)
 	{

@@ -52,7 +52,7 @@ public class GameWin extends Activity implements Callback, OnTouchListener
 		v = (RenderView) root.findViewById(R.id.renderView);
 		v.setGameWin(this);
 		v.setOnTouchListener(this);
-		if (v == null) Log.d("GameWin.onActivityResult()", "v == null ");
+		if (v == null) Log.d("GameWin.onCreate", "v == null ");
 		v.getHolder().addCallback(this);
 		this.setContentView(root);
 		initMediaPlayer();
@@ -68,8 +68,7 @@ public class GameWin extends Activity implements Callback, OnTouchListener
 	{
 		if (MOVEMENT_THRESHOLD == -1)
 		{
-			MOVEMENT_THRESHOLD = Commons.getBounds().width() / 8 / 2;
-			// moved only if moved greater than half the width of a block
+			MOVEMENT_THRESHOLD = Commons.getBounds().width() / CheckersBoard.NUM_COLS / 2; // moved only if moved greater than half the width of a block
 		}
 		if (arg0 == v)
 		{
@@ -83,7 +82,6 @@ public class GameWin extends Activity implements Callback, OnTouchListener
 
 			if (arg1.getAction() == MotionEvent.ACTION_UP)
 			{
-				// Log.d("here", "here");
 				if (Math.sqrt(Math.pow(x - arg1.getX(), 2) + Math.pow(y - arg1.getY(), 2)) < MOVEMENT_THRESHOLD)
 				{
 
@@ -124,11 +122,8 @@ public class GameWin extends Activity implements Callback, OnTouchListener
 									cb.move(gt.playMove());
 									endGame(cb.winner());
 								}
-
 							}
-
 						}
-
 						else
 						{
 							CharSequence message = "Invalid Move";
@@ -136,14 +131,16 @@ public class GameWin extends Activity implements Callback, OnTouchListener
 									Toast.LENGTH_SHORT);
 							toast.show();
 						}
+
 						move = null;
 					}
 				}
 			}
-			return true;
+
+			return true; // event handled
 		}
-		// let the system handle everything else
-		return false;
+
+		return false; // let the system handle everything else
 	}
 
 	private void endGame(int winner)
@@ -230,15 +227,14 @@ public class GameWin extends Activity implements Callback, OnTouchListener
     @Override
     public void surfaceCreated(SurfaceHolder holder)
     {
-        Log.d("GameWin.surfaceCreated()", "-here");
-        if (v == null) Log.d("GameWin.surfaceCreated()", "v == null ");
+        Log.d("surfaceCreated()", "-here");
+        if (v == null) Log.d("surfaceCreated()", "v == null ");
         v.resume();
     }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder)
     {
-        Log.d("GameWin.surfaceDestroyed()", "-here");
-
+        Log.d("surfaceDestroyed()", "-here");
     }
 }

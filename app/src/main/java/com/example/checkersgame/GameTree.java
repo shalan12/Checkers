@@ -50,13 +50,13 @@ public class GameTree
                 muls.add(1);
                 if (piece.is_crowned()) muls.add(-1); // if piece is crowned try moves in the opposite direction too
                 for (int mul : muls) {
-                    csm.setEnd(new CheckersPosition(pos.get_row() + mul * rowInc, pos.get_col() + 1)); // to move diagnoally one step
+                    csm.setEnd(new CheckersPosition(pos.get_row() + mul * rowInc, pos.get_col() + 1)); // to move diagonally one step
                     doMove(csm, nextTurn, turnNo, maxTurns, toMaximize);
-                    csm.setEnd(new CheckersPosition(pos.get_row() + mul * rowInc, pos.get_col() - 1)); // to move one step in the other diagnol
+                    csm.setEnd(new CheckersPosition(pos.get_row() + mul * rowInc, pos.get_col() - 1)); // to move one step in the other diagonal
                     doMove(csm, nextTurn, turnNo, maxTurns, toMaximize);
-                    csm.setEnd(new CheckersPosition(pos.get_row() + mul * rowInc * 2, pos.get_col() + 2)); // to move two steps in diagnol
+                    csm.setEnd(new CheckersPosition(pos.get_row() + mul * rowInc * 2, pos.get_col() + 2)); // to move two steps in diagonal
                     doMove(csm, nextTurn, turnNo, maxTurns, toMaximize);
-                    csm.setEnd(new CheckersPosition(pos.get_row() + mul * rowInc * 2, pos.get_col() - 2)); // to move two steps in the other diagnol
+                    csm.setEnd(new CheckersPosition(pos.get_row() + mul * rowInc * 2, pos.get_col() - 2)); // to move two steps in the other diagonal
                     doMove(csm, nextTurn, turnNo, maxTurns, toMaximize);
                 }
             }

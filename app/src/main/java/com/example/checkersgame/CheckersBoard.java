@@ -1,8 +1,12 @@
 package com.example.checkersgame;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import android.graphics.Rect;
+import android.util.Log;
 
 import com.example.checkersgame.CheckersPiece.PieceType;
 
@@ -20,7 +24,7 @@ public class CheckersBoard
     final static int NUM_PIECES = 12;
     public final static int MOVE_VALID = 1;
     public final static int MOVE_INVALID = -1;
-	private boolean turnIsKill;
+	private CheckersPiece jumpPiece; // if just jumped, this is the piece that made the jump
 	private PieceType turn;
 	private int winner;
 
@@ -31,9 +35,9 @@ public class CheckersBoard
 		this.darkPieces = new ArrayList<CheckersPiece>();
 		nonePiece = new CheckersPiece(PieceType.NON_PIECE);
 		nonePiece.setPos(-1, -1);
-		dstRect = Commons.getBounds();
-		turn = PieceType.LIGHT_PIECE;
-		turnIsKill = false;
+        jumpPiece = nonePiece;
+        dstRect = Commons.getBounds();
+        turn = PieceType.LIGHT_PIECE;
 		winner = DRAW;
 	}
 
@@ -83,7 +87,7 @@ public class CheckersBoard
 			this.lightPieces.add(cp);
 		}
 		this.turn = cb.turn;
-		this.turnIsKill = cb.turnIsKill;
+		this.jumpPiece = cb.jumpPiece;
 	}
 
 	CheckersPiece board_get_piece_at(int row, int col)
@@ -141,6 +145,7 @@ public class CheckersBoard
 		CheckersPiece cp = board_get_piece_at(cm.get_start().get_row(), cm.get_start().get_col());
 		if (isMoveValid(cm) == MOVE_VALID)
 		{
+            jumpPiece = nonePiece;
 			cp.setPos(cm.get_end().get_row(), cm.get_end().get_col());
 			CheckersPosition cStart = cm.get_start();
 			CheckersPosition cEnd = cm.get_end();
@@ -151,16 +156,12 @@ public class CheckersBoard
 			if (rowDiff == 2 || rowDiff == -2) // if killing a piece
 			{
 				CheckersPiece cap = board_get_piece_at(cStart.get_row() - rowDiff / 2, cStart.get_col() - colDiff / 2); // get piece being killed
-				if (!cap.is_none_piece()) // if is a valid piece
-				{
-					cap.set_captured();
-					turnIsKill = true; // get another turn to kill, if can kill
-				}
+				cap.set_captured();
+                if (canKill(cp)) jumpPiece = board_get_piece_at(cStart.get_row(), cStart.get_col()); // get another turn to kill, if can kill
 			}
 
-			if ((turnIsKill && !canKill(cp)) || !turnIsKill) // otherwise turn changes
-			{
-				turnIsKill = false;
+			if (jumpPiece.getPieceType() == PieceType.NON_PIECE)
+            {
 				if (turn == PieceType.DARK_PIECE) turn = PieceType.LIGHT_PIECE;
 				else turn = PieceType.DARK_PIECE;
 			}
@@ -245,30 +246,87 @@ public class CheckersBoard
 
 	public boolean canKill(CheckersPiece cp)
 	{
-		CheckersMove simpleMove = new CheckersMove();
-		simpleMove.setStart(cp.get_position());
-		CheckersPosition cpos = new CheckersPosition(cp.get_position().get_row() + 2, cp.get_position().get_col() + 2);
-		simpleMove.setEnd(cpos);
-		if (isMoveValid(simpleMove) == MOVE_VALID) return true;
-		cpos = new CheckersPosition(cp.get_position().get_row() + 2, cp.get_position().get_col() - 2);
-		simpleMove.setEnd(cpos);
-		if (isMoveValid(simpleMove) == MOVE_VALID) return true;
-		cpos = new CheckersPosition(cp.get_position().get_row() - 2, cp.get_position().get_col() + 2);
-		simpleMove.setEnd(cpos);
-		if (isMoveValid(simpleMove) == MOVE_VALID) return true;
-		cpos = new CheckersPosition(cp.get_position().get_row() - 2, cp.get_position().get_col() - 2);
-		simpleMove.setEnd(cpos);
-		if (isMoveValid(simpleMove) == MOVE_VALID) return true;
+        CheckersPosition cpos;
+        CheckersMove move = new CheckersMove();
+		move.setStart(cp.get_position());
+
+        if ((cp.getPieceType() == PieceType.LIGHT_PIECE || cp.is_crowned()) && cp.get_position().get_row() + 2 < NUM_ROWS) {
+            if(cp.get_position().get_col() + 2 < NUM_COLS) {
+                cpos = new CheckersPosition(cp.get_position().get_row() + 2, cp.get_position().get_col() + 2);
+                move.setEnd(cpos);
+                if (isKillingMove(move)) return true;
+            }
+            if (cp.get_position().get_col() - 2 >= 0) {
+                cpos = new CheckersPosition(cp.get_position().get_row() + 2, cp.get_position().get_col() - 2);
+                move.setEnd(cpos);
+                if (isKillingMove(move)) return true;
+            }
+        } else if ((cp.getPieceType() == PieceType.DARK_PIECE || cp.is_crowned()) && cp.get_position().get_row() - 2 >= 0) {
+            if (cp.get_position().get_col() + 2 < NUM_COLS) {
+
+                cpos = new CheckersPosition(cp.get_position().get_row() - 2, cp.get_position().get_col() + 2);
+                move.setEnd(cpos);
+                if (isKillingMove(move)) return true;
+            }
+            if (cp.get_position().get_col() - 2 >= 0) {
+
+                cpos = new CheckersPosition(cp.get_position().get_row() - 2, cp.get_position().get_col() - 2);
+                move.setEnd(cpos);
+                if (isKillingMove(move)) return true;
+            }
+        }
 		return false;
 
 	}
 
-	public int isMoveValid(CheckersMove simpleMove) //buggy
+    public boolean isKillingMove(CheckersMove move) {
+        CheckersPiece endPiece = board_get_piece_at(move.get_end().get_row(), move.get_end().get_col());
+        int dCol = move.get_end().get_col() - move.get_start().get_col();
+        int dRow = move.get_end().get_row() - move.get_start().get_row();
+        if (Math.abs(dCol) != 2 && Math.abs(dRow) != 2) return false;
+        int midR = move.get_start().get_row() + dRow / 2;
+        int midC = move.get_start().get_col() + dCol / 2;
+        CheckersPiece midPiece = board_get_piece_at(midR, midC); // get the piece that's one step away
+        return (midPiece.getPieceType() != turn && midPiece.getPieceType() != PieceType.NON_PIECE && endPiece.getPieceType() == PieceType.NON_PIECE);
+    }
+
+	public int isMoveValid(CheckersMove move) // buggy
 	{
-        //ArrayList<CheckersPiece> pieces;
-        CheckersPiece startPiece = board_get_piece_at(simpleMove.get_start().get_row(), simpleMove.get_start().get_col());
-        CheckersPiece endPiece = board_get_piece_at(simpleMove.get_end().get_row(), simpleMove.get_end().get_col());
-        //if (startPiece. != turn || endPiece)
+        CheckersPiece startPiece = board_get_piece_at(move.get_start().get_row(), move.get_start().get_col());
+        CheckersPiece endPiece = board_get_piece_at(move.get_end().get_row(), move.get_end().get_col());
+        CheckersPosition[] poss = {move.get_start(), move.get_end()};
+        Log.d("isMoveValid", turn.toString());
+        //check if positions within bounds
+        for (CheckersPosition pos : poss) {
+            if (pos.get_row() < 0 || pos.get_row() >= NUM_ROWS ||
+                pos.get_col() < 0 || pos.get_col() >= NUM_COLS) return  MOVE_INVALID;
+        }
+
+        if (startPiece.getPieceType() != turn || endPiece.getPieceType() != PieceType.NON_PIECE) return MOVE_INVALID; // moving wrong piece or moving on top of a piece
+        else if (jumpPiece.getPieceType() != PieceType.NON_PIECE && startPiece != jumpPiece) return  MOVE_INVALID; // moving wrong piece
+        else {
+            int dCol = move.get_end().get_col() - move.get_start().get_col();
+            int dRow = move.get_end().get_row() - move.get_start().get_row();
+            if (!startPiece.is_crowned() &&
+               (
+                  (startPiece.getPieceType() == PieceType.DARK_PIECE && dRow > 0) ||
+                  (startPiece.getPieceType() == PieceType.LIGHT_PIECE && dRow < 0))
+               ) return  MOVE_INVALID; // moving in wrong direction
+
+            boolean playerCankill = false;
+            List<CheckersPiece> pieces;
+            if (jumpPiece.getPieceType() != PieceType.NON_PIECE) pieces = Arrays.asList(jumpPiece);
+            else pieces = getPieces(startPiece.getPieceType());
+            for (CheckersPiece piece : pieces) {
+                playerCankill = playerCankill || canKill(piece);
+            }
+            // we know pieces are moving in the right direction at this point. just need to check if the number of steps is right
+            if (playerCankill) {
+                if (!isKillingMove(move)) return MOVE_INVALID; // isKillingMove also checks if the number of steps taken was correct
+            } else {
+                if (Math.abs(dRow) != 1 || Math.abs(dCol) != 1) return MOVE_INVALID;
+            }
+        }
         return MOVE_VALID;
 
 	}
