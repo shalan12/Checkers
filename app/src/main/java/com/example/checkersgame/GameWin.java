@@ -21,6 +21,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 import com.example.checkersgame.CheckersPiece.PieceType;
+import com.example.checkersgame.CheckersBoard.MOVE;
 
 public class GameWin extends Activity implements Callback, OnTouchListener
 {
@@ -43,7 +44,7 @@ public class GameWin extends Activity implements Callback, OnTouchListener
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
 				WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        difficulty = this.getIntent().getIntExtra(getString(R.string.extra_difficulty), -1); // get difficulty level
+        difficulty = this.getIntent().getIntExtra(getString(R.string.extra_difficulty), -1); // get difficulty level, used to determine max_depth for tree
 		move = null;
         cb = new CheckersBoard();
 
@@ -85,13 +86,13 @@ public class GameWin extends Activity implements Callback, OnTouchListener
 				if (Math.sqrt(Math.pow(x - arg1.getX(), 2) + Math.pow(y - arg1.getY(), 2)) < MOVEMENT_THRESHOLD)
 				{
 
-					int col = (int) (arg1.getX() / (cb.getDstRect().width() / 8));
-					int row = (int) ((arg1.getY() - Commons.getBounds().top) / (cb.getDstRect().height() / 8));
+					int col = (int) (arg1.getX() / (cb.getDstRect().width() / CheckersBoard.NUM_COLS));
+					int row = (int) ((arg1.getY() - Commons.getBounds().top) / (cb.getDstRect().height() / CheckersBoard.NUM_ROWS));
 					Log.d("GameWin.onTouch", "row = : " + row + "col = : " + col);
 
 					if (move == null)
 					{
-						if (!cb.board_get_piece_at(row, col).is_none_piece())
+						if (!cb.getPieceAt(row, col).is_none_piece())
 						{
 							move = new CheckersMove();
 							move.setStart(new CheckersPosition(row, col));
@@ -100,33 +101,30 @@ public class GameWin extends Activity implements Callback, OnTouchListener
 					else
 					{
 						move.setEnd(new CheckersPosition(row, col));
-
-						if (cb.isMoveValid(move) == CheckersBoard.MOVE_VALID)
+                        MOVE moveValidity = cb.isMoveValid(move);
+						if (moveValidity == CheckersBoard.MOVE.MOVE_VALID)
 						{
-							cb.move(move);
-							endGame(cb.winner());
+							cb.move(move); // perform move
+							endGame(cb.getWinner()); // checks for game end conditions and takes appropriate actions
 
 							while (cb.get_turn() == PieceType.DARK_PIECE)
 							{
-
-								gt = new GameTree(cb, PieceType.DARK_PIECE, 0, difficulty);
+                                Log.d("GameWin.onTouch", "another iteration");
+								gt = new GameTree(cb, 0, difficulty);
 								if (gt.subTrees.size() == 0)
 								{
-									cb.set_winner(CheckersBoard.WINNER_LIGHT);
-									endGame(cb.winner());
-									cb.setTurn(PieceType.DARK_PIECE);
-									break;
+								    break;
 								}
 								else
 								{
 									cb.move(gt.playMove());
-									endGame(cb.winner());
+									endGame(cb.getWinner());
 								}
 							}
 						}
 						else
 						{
-							CharSequence message = "Invalid Move";
+							CharSequence message = "Invalid Move -- " + moveValidity.toString();
 							Toast toast = Toast.makeText(this.getApplicationContext(), message,
 									Toast.LENGTH_SHORT);
 							toast.show();
@@ -143,11 +141,11 @@ public class GameWin extends Activity implements Callback, OnTouchListener
 		return false; // let the system handle everything else
 	}
 
-	private void endGame(int winner)
+	private void endGame(PieceType winner)
 	{
-		if (winner == CheckersBoard.DRAW) return;
+		if (winner == PieceType.NON_PIECE) return;
 		String msg = "";
-		if (winner == CheckersBoard.WINNER_DARK) msg = "The Dark Side Won\nDo you Wish to Play Again?";
+		if (winner == PieceType.DARK_PIECE) msg = "The Dark Side Won\nDo you Wish to Play Again?";
 		else msg = "Light Won\n Do you Wish to Play Again ?";
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -167,8 +165,8 @@ public class GameWin extends Activity implements Callback, OnTouchListener
 		{
 			public void onClick(DialogInterface dialog, int id)
 			{
-				GameWin.this.finish();
-
+				dialog.cancel();
+                //GameWin.this.finish();
 			}
 		});
 		builder.create();

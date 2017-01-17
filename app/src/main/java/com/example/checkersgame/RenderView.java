@@ -93,7 +93,7 @@ public class RenderView extends SurfaceView
 			{
 				for (int j = 0; j < CheckersBoard.NUM_COLS; j++)
 				{
-					cp = gw.getBoard().board_get_piece_at(i, j);
+					cp = gw.getBoard().getPieceAt(i, j);
 					if (!cp.is_none_piece())
 					{
 						temp = cp.getdstRect();
