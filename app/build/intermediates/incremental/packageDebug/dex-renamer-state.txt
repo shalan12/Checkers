@@ -1,4 +1,4 @@
-#Tue Jan 17 18:58:19 CST 2017
+#Tue Jan 17 19:05:47 CST 2017
 base.0=/home/shalan/StudioProjects/Checkers/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_cc003d004751ff7377daee875214cb5d6b527f34
 renamed.1=classes.dex
 renamed.0=classes2.dex

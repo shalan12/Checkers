@@ -11,7 +11,7 @@
 	    android:background="@color/blue"
 	    style = "@style/button_style"
 	    android:layout_marginBottom="2dp"
-	    android:tag="1"
+	    android:tag="2"
 	    android:onClick="onClick">
 	</Button>
 	<Button
