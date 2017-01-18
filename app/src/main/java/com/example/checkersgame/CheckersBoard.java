@@ -24,7 +24,11 @@ public class CheckersBoard
     private CheckersPiece jumpPiece; // if just jumped, this is the piece that made the jump
 	private PieceType turn;
 	private PieceType winner;
+    ArrayList<MoveListener> moveListeners;
 
+    public void addMoveListener(MoveListener moveListener) {
+        this.moveListeners.add(moveListener);
+    }
 
 	public void initVars()
 	{
@@ -36,6 +40,7 @@ public class CheckersBoard
         dstRect = Commons.getBounds();
         turn = PieceType.LIGHT_PIECE;
 		winner = PieceType.NON_PIECE;
+        moveListeners = new ArrayList<MoveListener>();
 	}
 
 	public void setTurn(PieceType pt)
@@ -163,7 +168,10 @@ public class CheckersBoard
 
 			if (cp.getPieceType() == PieceType.DARK_PIECE && cEnd.get_row() == 0) cp.setCrowned(true);
 			else if (cp.getPieceType() == PieceType.LIGHT_PIECE && cEnd.get_row() == NUM_ROWS - 1) cp.setCrowned(true);
-		}
+		    for (MoveListener moveListener : moveListeners) {
+                moveListener.onMove(cm);
+            }
+        }
 	}
 
 	public ArrayList<CheckersPiece> getPieces(PieceType pT)

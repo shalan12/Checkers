@@ -1,10 +1,5 @@
 package com.example.checkersgame;
 
-import android.graphics.Rect;
-
-import java.util.ArrayDeque;
-import java.util.Queue;
-
 public class CheckersPiece
 {
     public enum PieceType {
@@ -14,37 +9,22 @@ public class CheckersPiece
     private boolean crowned, captured;
     private PieceType pieceType;
 	private CheckersPosition pos;
-	private Rect dstRect;
-    // for animation
-	private Queue<Float> velX, velY; // we'll have a queue of velocities, corresponding to the pending animations (in-case more than one move is performed suddenly)
-    private final int timesteps = 8;
-    private int curr_time_step;
-
-
 
 	public CheckersPiece(PieceType pieceType)
 	{
 		pos = new CheckersPosition();
-		dstRect = new Rect();
 		piece_init();
-        velX = new ArrayDeque<Float>();
-        velY = new ArrayDeque<Float>();
-        curr_time_step = timesteps;
         this.pieceType = pieceType;
 	}
 
 	public CheckersPiece(CheckersPiece cp)
 	{
 		pos = new CheckersPosition();
-		dstRect = new Rect();
-        velX = new ArrayDeque<Float>();
-        velY = new ArrayDeque<Float>();
 		this.setPos(cp.get_position().get_row(), cp.get_position().get_col());
 		if (cp.is_captured()) this.set_captured();
 		else this.captured = false;
 		this.setCrowned(cp.is_crowned());
 		this.pieceType = cp.pieceType;
-        curr_time_step = timesteps;
 	}
 
     private void piece_init()
@@ -58,40 +38,8 @@ public class CheckersPiece
 
     public void setPos(int row, int col)
 	{
-        Rect bounds = Commons.getBounds();
-        if (bounds != null) {
-            float sX = (col - this.pos.get_col()) * (bounds.right - bounds.left) / CheckersBoard.NUM_COLS ;
-            float sY = (row - this.pos.get_row()) * (bounds.bottom - bounds.top) / CheckersBoard.NUM_ROWS ;
-            this.velX.add(sX/timesteps);
-            this.velY.add(sY/timesteps);
-            curr_time_step = 0;
-        }
         this.pos.setCol(col);
         this.pos.setRow(row);
-	}
-
-	public Rect getdstRect()
-	{
-		Rect bounds = Commons.getBounds();
-        // animate piece to it's position
-        if (curr_time_step >= timesteps) {
-            if (!velX.isEmpty()) velX.remove();
-            if (!velY.isEmpty()) velY.remove();
-            curr_time_step = 0;
-        }
-        if (velX.isEmpty()) {
-            dstRect.left = (int) ((bounds.right - bounds.left) / CheckersBoard.NUM_COLS * this.pos.get_col());
-            dstRect.right = (int) ((int) (dstRect.left + (bounds.right - bounds.left) / ((float)CheckersBoard.NUM_COLS) ));
-            dstRect.top = (int) ((bounds.bottom - bounds.top) / CheckersBoard.NUM_ROWS * (this.pos.get_row()) + bounds.top);
-            dstRect.bottom = (int) ((int) (dstRect.top + (bounds.bottom - bounds.top) / ((float)CheckersBoard.NUM_ROWS) ));
-        } else {
-            curr_time_step += 1;
-            dstRect.left += velX.peek();
-            dstRect.right += velX.peek();
-            dstRect.top += velY.peek();
-            dstRect.bottom += velY.peek();
-        }
-		return dstRect;
 	}
 
 	boolean is_none_piece()

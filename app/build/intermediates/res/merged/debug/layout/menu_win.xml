@@ -19,14 +19,14 @@
 	   	android:background="@color/blue2"
 	   	style = "@style/button_style"
 	   	android:layout_marginBottom="2dp"
-	   	android:tag="4"
+	   	android:tag="3"
 	   	android:onClick="onClick">
 	</Button>
 	<Button
 	    android:text="Difficult"
 	    android:background="@color/blue"
 	    style = "@style/button_style"
-	    android:tag="6"
+	    android:tag="4"
 	    android:onClick="onClick">
 	</Button>
 </LinearLayout>

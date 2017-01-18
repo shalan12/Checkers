@@ -1,37 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="arm64-v8a,armeabi-v7a,armeabi"
-    api-level="23"
-    density="xxxhdpi"
+    abi="x86_64,x86"
+    api-level="22"
+    density="hdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="227147128725776"
+    timestamp="243383421395055"
     token="8215692461422699136"
-    verifier="FULL_BUILD_REQUESTED" >
+    verifier="COMPATIBLE" >
 
     <task
         name="javac"
-        duration="116" />
+        duration="109" />
     <task
         name="instant-run-dex"
-        duration="0" />
+        duration="1217" />
     <task
         name="instant-run-transform"
-        duration="52" />
+        duration="25" />
     <task
         name="verifier"
-        duration="0" />
+        duration="1" />
 
     <artifact
-        location="/home/shalan/StudioProjects/Checkers/app/build/outputs/apk/app-debug.apk"
-        type="MAIN" />
+        location="/home/shalan/StudioProjects/Checkers/app/build/intermediates/reload-dex/debug/classes.dex"
+        type="RELOAD_DEX" />
 
     <build
-        timestamp="227147128725776"
+        timestamp="242005919815040"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="/home/shalan/StudioProjects/Checkers/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
+    </build>
+    <build
+        timestamp="243356888648814"
+        verifier="FIELD_TYPE_CHANGE" >
+        <artifact
+            location="/home/shalan/StudioProjects/Checkers/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex"
+            type="DEX" />
+    </build>
+    <build
+        timestamp="243383421395055"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="/home/shalan/StudioProjects/Checkers/app/build/intermediates/reload-dex/debug/classes.dex"
+            type="RELOAD_DEX" />
     </build>
 
 </instant-run>

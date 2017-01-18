@@ -1,10 +1,10 @@
 #Internal package file, do not edit.
-#Tue Jan 17 01:24:26 CST 2017
+#Tue Jan 17 23:13:24 CST 2017
 8.set=ASSET
 1.base=/home/shalan/StudioProjects/Checkers/app/build/intermediates/res/resources-debug.ap_
 1.file=/home/shalan/StudioProjects/Checkers/app/build/intermediates/res/resources-debug.ap_/res/drawable-hdpi-v4/text_border.xml
-3.file=/home/shalan/StudioProjects/Checkers/app/build/intermediates/res/resources-debug.ap_/res/drawable-xxhdpi-v4/ic_launcher.png
-3.base=/home/shalan/StudioProjects/Checkers/app/build/intermediates/res/resources-debug.ap_
+3.file=/home/shalan/StudioProjects/Checkers/app/build/intermediates/assets/debug/images/checkers_piece_blue.png
+3.base=/home/shalan/StudioProjects/Checkers/app/build/intermediates/assets/debug
 4.set=ASSET
 5.base=/home/shalan/StudioProjects/Checkers/app/build/intermediates/res/resources-debug.ap_
 5.file=/home/shalan/StudioProjects/Checkers/app/build/intermediates/res/resources-debug.ap_/AndroidManifest.xml
@@ -20,13 +20,13 @@
 0.set=ASSET
 7.set=ANDROID_RESOURCE
 14.set=ASSET
-3.set=ANDROID_RESOURCE
+3.set=ASSET
 10.set=ANDROID_RESOURCE
 0.base=/home/shalan/StudioProjects/Checkers/app/build/intermediates/assets/debug
 0.file=/home/shalan/StudioProjects/Checkers/app/build/intermediates/assets/debug/images/checkers_piece_blue_crowned.png
 6.set=ASSET
-2.file=/home/shalan/StudioProjects/Checkers/app/build/intermediates/assets/debug/images/checkers_piece_blue.png
-2.base=/home/shalan/StudioProjects/Checkers/app/build/intermediates/assets/debug
+2.file=/home/shalan/StudioProjects/Checkers/app/build/intermediates/res/resources-debug.ap_/res/drawable-hdpi-v4/ic_launcher.png
+2.base=/home/shalan/StudioProjects/Checkers/app/build/intermediates/res/resources-debug.ap_
 4.file=/home/shalan/StudioProjects/Checkers/app/build/intermediates/assets/debug/images/light_piece.png
 4.base=/home/shalan/StudioProjects/Checkers/app/build/intermediates/assets/debug
 6.base=/home/shalan/StudioProjects/Checkers/app/build/intermediates/assets/debug
@@ -36,7 +36,7 @@
 13.set=ASSET
 8.base=/home/shalan/StudioProjects/Checkers/app/build/intermediates/assets/debug
 8.file=/home/shalan/StudioProjects/Checkers/app/build/intermediates/assets/debug/images/light_crowned.png
-2.set=ASSET
+2.set=ANDROID_RESOURCE
 12.file=/home/shalan/StudioProjects/Checkers/app/build/intermediates/assets/debug/images/dark_crowned.png
 12.base=/home/shalan/StudioProjects/Checkers/app/build/intermediates/assets/debug
 14.file=/home/shalan/StudioProjects/Checkers/app/build/intermediates/assets/debug/music/gamemusic.mp3
