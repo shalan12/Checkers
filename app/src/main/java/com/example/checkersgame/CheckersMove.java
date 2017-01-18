@@ -17,8 +17,7 @@ public class CheckersMove
 	@Override
 	public String toString()
 	{
-		return "Start : row = " + start.get_row() + " col = " + start.get_col() + "\nEnd : row = "
-				+ end.get_row() + " col = " + end.get_col();
+		return "[[" + start.get_row() + ", " + start.get_col() + "][" + end.get_row() + ", " + end.get_col() + "]]";
 	}
 
 	public void initVars()
@@ -36,11 +35,13 @@ public class CheckersMove
 		end.setCol(-1);
 	}
 
-	public CheckersMove(String s1, String s2)
+	public CheckersMove(CheckersMove cm)
 	{
 		initVars();
-		start.position_parse(s1);
-		end.position_parse(s2);
+		start.setRow(cm.get_start().get_row());
+		start.setCol(cm.get_start().get_col());
+		end.setRow(cm.get_end().get_row());
+		end.setCol(cm.get_end().get_col());
 	}
 
 	public CheckersPosition get_start()

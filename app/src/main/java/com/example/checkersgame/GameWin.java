@@ -30,7 +30,7 @@ public class GameWin extends Activity implements Callback, OnTouchListener
 	private CheckersMove move;
 	MediaPlayer mediaPlayer = null;
 	int difficulty;
-	GameTree gt;
+	GameTreePlayer gt;
 	private int MOVEMENT_THRESHOLD = -1;
 	int x, y;
 
@@ -109,15 +109,18 @@ public class GameWin extends Activity implements Callback, OnTouchListener
 
 							while (cb.get_turn() == PieceType.DARK_PIECE)
 							{
-                                Log.d("GameWin.onTouch", "another iteration");
-								gt = new GameTree(cb, 0, difficulty);
-								if (gt.subTrees.size() == 0)
+                                Log.d("GameWin.onTouch", "another iteration -- turn == " + cb.get_turn().toString());
+								gt = new GameTreePlayer(cb, difficulty);
+								CheckersMove cm = gt.getBestMove();
+                                if (cm == null)
 								{
+                                    endGame(PieceType.LIGHT_PIECE);
 								    break;
 								}
 								else
 								{
-									cb.move(gt.playMove());
+                                    Log.d("GameWin.onTouch", "performing move " + cm.toString());
+									cb.move(cm);
 									endGame(cb.getWinner());
 								}
 							}

@@ -64,11 +64,6 @@ public class CheckersBoard
 		return turn;
 	}
 
-	public void set_winner(PieceType winner)
-	{
-		this.winner = winner;
-	}
-
 	public CheckersBoard(CheckersBoard cb)
 	{
 		initVars();
@@ -161,10 +156,10 @@ public class CheckersBoard
 
 			if (jumpPiece == nonePiece)
             {
-                Log.d("move", "no jumpPiece -- switching turns");
 				if (turn == PieceType.DARK_PIECE) turn = PieceType.LIGHT_PIECE;
 				else turn = PieceType.DARK_PIECE;
-			}
+                Log.d("move", "no jumpPiece -- switching turns to " + turn.toString());
+            }
 
 			if (cp.getPieceType() == PieceType.DARK_PIECE && cEnd.get_row() == 0) cp.setCrowned(true);
 			else if (cp.getPieceType() == PieceType.LIGHT_PIECE && cEnd.get_row() == NUM_ROWS - 1) cp.setCrowned(true);
@@ -278,8 +273,8 @@ public class CheckersBoard
 	}
 
     public boolean isKillingMove(CheckersMove move) {
-        Log.d("isKillingMove", "Testing move [[" + move.get_start().get_row() + "," + move.get_start().get_col() + "], " +
-                "[" + move.get_end().get_row() + ", " + move.get_end().get_col() +"] ]");
+        /*Log.d("isKillingMove", "Testing move [[" + move.get_start().get_row() + "," + move.get_start().get_col() + "], " +
+                "[" + move.get_end().get_row() + ", " + move.get_end().get_col() +"] ]");*/
         CheckersPiece endPiece = getPieceAt(move.get_end().get_row(), move.get_end().get_col());
         int dCol = move.get_end().get_col() - move.get_start().get_col();
         int dRow = move.get_end().get_row() - move.get_start().get_row();
@@ -287,8 +282,8 @@ public class CheckersBoard
         int midR = move.get_start().get_row() + dRow / 2;
         int midC = move.get_start().get_col() + dCol / 2;
         CheckersPiece midPiece = getPieceAt(midR, midC); // get the piece that's one step away
-        Log.d("isKillingMove", "isKillingMove == " +
-                Boolean.toString(midPiece.getPieceType() != turn && midPiece.getPieceType() != PieceType.NON_PIECE && endPiece.getPieceType() == PieceType.NON_PIECE));
+        /*Log.d("isKillingMove", "isKillingMove == " +
+                Boolean.toString(midPiece.getPieceType() != turn && midPiece.getPieceType() != PieceType.NON_PIECE && endPiece.getPieceType() == PieceType.NON_PIECE));*/
         return (midPiece.getPieceType() != turn && midPiece.getPieceType() != PieceType.NON_PIECE && endPiece.getPieceType() == PieceType.NON_PIECE);
     }
 
@@ -297,8 +292,9 @@ public class CheckersBoard
         CheckersPiece startPiece = getPieceAt(move.get_start().get_row(), move.get_start().get_col());
         CheckersPiece endPiece = getPieceAt(move.get_end().get_row(), move.get_end().get_col());
         CheckersPosition[] poss = {move.get_start(), move.get_end()};
-        Log.d("isMoveValid", turn.toString());
-        //check if positions within bounds
+        //Log.d("isMoveValid", turn.toString());
+
+        // check if positions within bounds
         for (CheckersPosition pos : poss) {
             if (pos.get_row() < 0 || pos.get_row() >= NUM_ROWS ||
                 pos.get_col() < 0 || pos.get_col() >= NUM_COLS) return  MOVE.MOVE_OUT_OF_BOUNDS;
@@ -322,7 +318,7 @@ public class CheckersBoard
             for (CheckersPiece piece : pieces) {
                 playerCankill = playerCankill || canKill(piece);
             }
-            Log.d("isMoveValid", "canKill == " + Boolean.toString(playerCankill));
+            //Log.d("isMoveValid", "canKill == " + Boolean.toString(playerCankill));
             // we know pieces are moving in the right direction at this point. just need to check if the number of steps is right
             if (playerCankill) {
                 if (!isKillingMove(move)) return MOVE.NOT_KILLING_MOVE; // isKillingMove also checks if the number of steps taken was 2
